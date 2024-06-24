@@ -16,6 +16,7 @@ function Root() {
                 Appointments
                 </NavLink>
             </nav>
+            <h1>Appointment Planner</h1>
             <Outlet/>
       </>
     );

@@ -17,28 +17,32 @@ function App() {
   contacts and appointments
   */
   const addContact = (name, phoneNumber, email) =>{
-    const newContact = { name, phoneNumber, email};
-    setContacts(...contacts, newContact);
-  }
+    const newContact = { 
+      name: name, 
+      phone: phoneNumber,
+      email: email
+    };
+    setContacts([...contacts, newContact]);
+  };
 
   const addAppointment = (name, contact, date, time) =>{
     const newAppointment = {name, contact, date, time};
-    setAppointments(...appointments, newAppointment);
-  }
+    setAppointments([...appointments, newAppointment]);
+  };
 
   const router = createBrowserRouter(createRoutesFromElements(
     <Route path="/" element={ <Root/> }>
       <Route index element={ <Navigate to={ROUTES.CONTACTS} replace/> }/>
-      <Route path={ROUTES.CONTACTS} element={ <ContactsPage /> /* Add props to ContactsPage */ }/>
-      <Route path={ROUTES.APPOINTMENTS} element={ <AppointmentsPage /> /* Add props to AppointmentsPage */ }/>
+      <Route path={ROUTES.CONTACTS} element={ <ContactsPage contacts = {contacts} addContact = {addContact}/> /* Add props to ContactsPage */ }/>
+      <Route path={ROUTES.APPOINTMENTS} element={ <AppointmentsPage appointments = {appointments} addAppointment = {addAppointment} contacts = {contacts}/> /* Add props to AppointmentsPage */ }/>
     </Route>
   ));
   
   return (
     <>
      <RouterProvider router={router}/>
-     <ContactsPage contacts = {contacts} addContact = {addContact}/>
-     <AppointmentsPage appointments = {appointments} addAppointment = {addAppointment}/>
+     
+     
     </>
    
   );
